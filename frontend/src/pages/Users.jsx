@@ -20,7 +20,10 @@ function Users() {
   return (
     <div className="page">
       <h1>Users</h1>
-      <p>Manage users and their assigned roles.</p>
+
+      <p>
+        Manage users and their assigned roles.
+      </p>
 
       <table className="logs-table">
         <thead>
@@ -46,6 +49,3 @@ function Users() {
 }
 
 export default Users;
-
-
-"we updated the users.jsx"
