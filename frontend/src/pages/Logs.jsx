@@ -29,7 +29,10 @@ function Logs() {
   return (
     <div className="page">
       <h1>Security Logs</h1>
-      <p>Monitor AI security events and detected threats.</p>
+
+      <p>
+        Monitor AI security events and detected threats.
+      </p>
 
       <table className="logs-table">
         <thead>
@@ -57,5 +60,3 @@ function Logs() {
 }
 
 export default Logs;
-
-"login pageS"
