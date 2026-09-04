@@ -1,16 +1,23 @@
-# DLP Scanner using Microsoft Presidio
-# This detects and masks sensitive data like emails, phones, credit cards, etc.
+# DLP Scanner using Microsoft Presidio with Custom Patterns
+# This detects and masks sensitive data like emails, phones, credit cards, SSNs, API keys
 
 from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer import AnonymizerEngine
-from presidio_anonymizer.entities import OperatorConfig
+from custom_patterns import CustomDLP
 
 print("=" * 60)
-print("         DLP SCANNER - Presidio Version")
+print("         DLP SCANNER - Presidio with Custom Patterns")
 print("=" * 60)
 
 print("\n[1] Initializing Analyzer...")
 analyzer = AnalyzerEngine()
+
+# Add custom recognizers
+print("[1a] Loading custom patterns (SSN, API keys, etc.)...")
+custom_dlp = CustomDLP()
+for recognizer in custom_dlp.get_recognizers():
+    analyzer.registry.add_recognizer(recognizer)
+print("     ✅ Custom patterns loaded!")
 
 print("[2] Initializing Anonymizer...")
 anonymizer = AnonymizerEngine()
@@ -21,7 +28,8 @@ My email is john.doe@example.com.
 My phone number is (123) 456-7890.
 My credit card is 4111-1111-1111-1111.
 My Social Security number is 123-45-6789.
-My API key is AKIA1234567890ABCDEF.
+My AWS API key is AKIA1234567890ABCDEF.
+My GitHub token is ghp_1234567890abcdefghijklmnopqrstuv.
 """
 
 print("[4] Original prompt:")
