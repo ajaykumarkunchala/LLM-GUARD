@@ -107,3 +107,39 @@ body {
 .logs-table th {
   background: #f1f5f1;
 }
+.page {
+  width: 100%;
+}
+
+.page h1 {
+  margin-bottom: 8px;
+}
+
+.page > p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.logs-table th,
+.logs-table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.logs-table th {
+  background: #f1f3f5;
+  font-weight: 600;
+}
+
+.logs-table tr:hover {
+  background: #f8f9fa;
+}
