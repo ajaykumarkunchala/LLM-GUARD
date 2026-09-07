@@ -20,6 +20,28 @@ pnpm-debug.log*
 .vscode/
 .idea/
 
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
 # OS files
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
+
+# Download models
+en_core_web_lg/
