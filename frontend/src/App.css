@@ -143,3 +143,19 @@ body {
 .logs-table tr:hover {
   background: #f8f9fa;
 }
+
+.user-info {
+  background: white;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.user-info h3 {
+  margin-top: 0;
+}
+
+.user-info p {
+  margin: 8px 0;
+}
