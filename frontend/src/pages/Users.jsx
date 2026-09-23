@@ -35,6 +35,25 @@ function Users() {
     setShowForm(false);
   };
 
+  const handleDeleteUser = (id) => {
+    const selectedUser = users.find((item) => item.id === id);
+
+    if (selectedUser.role === "Admin") {
+      alert("Admin users cannot be deleted.");
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      `Delete user "${selectedUser.name}"?`
+    );
+
+    if (confirmDelete) {
+      setUsers(
+        users.filter((item) => item.id !== id)
+      );
+    }
+  };
+
   return (
     <div className="page">
       <h1>User Management</h1>
@@ -60,6 +79,7 @@ function Users() {
             <th>User</th>
             <th>Role</th>
             <th>Access</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -67,12 +87,30 @@ function Users() {
           {users.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
+
               <td>{item.name}</td>
+
               <td>{item.role}</td>
+
               <td>
                 {item.role === "Admin"
                   ? "Full Access"
                   : "Dashboard & Logs"}
+              </td>
+
+              <td>
+                {item.role === "Admin" ? (
+                  <span>Protected</span>
+                ) : (
+                  <button
+                    className="delete-button"
+                    onClick={() =>
+                      handleDeleteUser(item.id)
+                    }
+                  >
+                    Delete
+                  </button>
+                )}
               </td>
             </tr>
           ))}
@@ -84,7 +122,9 @@ function Users() {
         <div className="admin-actions">
           <h3>Admin Actions</h3>
 
-          <button onClick={() => setShowForm(!showForm)}>
+          <button
+            onClick={() => setShowForm(!showForm)}
+          >
             {showForm ? "Cancel" : "Add User"}
           </button>
 
