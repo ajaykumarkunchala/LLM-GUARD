@@ -178,3 +178,20 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.log-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.log-controls input,
+.log-controls select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.log-controls input {
+  width: 250px;
+}
