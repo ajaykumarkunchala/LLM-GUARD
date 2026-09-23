@@ -49,6 +49,27 @@ function Logs() {
 
     return matchesSearch && matchesStatus;
   });
+  <div className="log-summary">
+  <div className="log-card">
+    <h3>Total Events</h3>
+    <p>{logs.length}</p>
+  </div>
+
+  <div className="log-card">
+    <h3>Blocked</h3>
+    <p>{logs.filter((log) => log.status === "Blocked").length}</p>
+  </div>
+
+  <div className="log-card">
+    <h3>Masked</h3>
+    <p>{logs.filter((log) => log.status === "Masked").length}</p>
+  </div>
+
+  <div className="log-card">
+    <h3>High Severity</h3>
+    <p>{logs.filter((log) => log.severity === "High").length}</p>
+  </div>
+</div>
 
   return (
     <div className="page">
