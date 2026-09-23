@@ -29,6 +29,9 @@ function Sidebar() {
           <Link to="/users">Users</Link>
         )}
       </nav>
+      {user.role === "Admin" && (
+  <Link to="/activity-logs">Activity Logs</Link>
+)}
 
       <button onClick={logout}>
         Logout

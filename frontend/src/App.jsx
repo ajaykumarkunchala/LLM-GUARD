@@ -6,6 +6,7 @@ import Users from "./pages/Users";
 import Login from "./pages/Login";
 import Sidebar from "./components/Sidebar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ActivityLogs from "./pages/ActivityLogs";
 
 import "./App.css";
 
@@ -46,6 +47,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+  path="/activity-logs"
+  element={
+    <ProtectedRoute allowedRoles={["Admin"]}>
+      <ActivityLogs />
+    </ProtectedRoute>
+  }
+/>
 
             <Route path="/" element={<Login />} />
 

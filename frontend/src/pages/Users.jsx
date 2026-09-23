@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
+import { activityLogs } from "../data/activityLogs";
 
 function Users() {
   const { user } = useAuth();
@@ -30,13 +31,23 @@ function Users() {
 
     setUsers([...users, newUser]);
 
+    activityLogs.push({
+      id: activityLogs.length + 1,
+      user: user.username,
+      action: "Add User",
+      details: `Created user ${newUsername} with ${newRole} role`,
+      time: new Date().toLocaleTimeString(),
+    });
+
     setNewUsername("");
     setNewRole("Analyst");
     setShowForm(false);
   };
 
   const handleDeleteUser = (id) => {
-    const selectedUser = users.find((item) => item.id === id);
+    const selectedUser = users.find(
+      (item) => item.id === id
+    );
 
     if (selectedUser.role === "Admin") {
       alert("Admin users cannot be deleted.");
@@ -51,6 +62,14 @@ function Users() {
       setUsers(
         users.filter((item) => item.id !== id)
       );
+
+      activityLogs.push({
+        id: activityLogs.length + 1,
+        user: user.username,
+        action: "Delete User",
+        details: `Deleted user ${selectedUser.name}`,
+        time: new Date().toLocaleTimeString(),
+      });
     }
   };
 
@@ -58,7 +77,9 @@ function Users() {
     <div className="page">
       <h1>User Management</h1>
 
-      <p>Manage users and their assigned security roles.</p>
+      <p>
+        Manage users and their assigned security roles.
+      </p>
 
       <div className="user-info">
         <h3>Access Level</h3>
@@ -87,9 +108,7 @@ function Users() {
           {users.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
-
               <td>{item.name}</td>
-
               <td>{item.role}</td>
 
               <td>
@@ -117,7 +136,6 @@ function Users() {
         </tbody>
       </table>
 
-      {/* Admin Only Section */}
       {user?.role === "Admin" && (
         <div className="admin-actions">
           <h3>Admin Actions</h3>
