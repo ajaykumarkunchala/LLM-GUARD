@@ -1,45 +1,11 @@
 import { useState } from "react";
+import { securityLogs } from "../data/securityLogs";
 
 function Logs() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
-  const logs = [
-    {
-      id: 1,
-      type: "Prompt Injection",
-      user: "user01",
-      status: "Blocked",
-      severity: "High",
-      time: "10:30 AM",
-    },
-    {
-      id: 2,
-      type: "Normal Request",
-      user: "user02",
-      status: "Allowed",
-      severity: "Low",
-      time: "10:42 AM",
-    },
-    {
-      id: 3,
-      type: "Sensitive Data",
-      user: "user03",
-      status: "Masked",
-      severity: "Medium",
-      time: "11:05 AM",
-    },
-    {
-      id: 4,
-      type: "Jailbreak Attempt",
-      user: "user04",
-      status: "Blocked",
-      severity: "High",
-      time: "11:20 AM",
-    },
-  ];
-
-  const filteredLogs = logs.filter((log) => {
+  const filteredLogs = securityLogs.filter((log) => {
     const matchesSearch =
       log.type.toLowerCase().includes(search.toLowerCase()) ||
       log.user.toLowerCase().includes(search.toLowerCase());
@@ -62,27 +28,39 @@ function Logs() {
       <div className="log-summary">
         <div className="log-card">
           <h3>Total Events</h3>
-          <p>{logs.length}</p>
+          <p>{securityLogs.length}</p>
         </div>
 
         <div className="log-card">
           <h3>Blocked</h3>
           <p>
-            {logs.filter((log) => log.status === "Blocked").length}
+            {
+              securityLogs.filter(
+                (log) => log.status === "Blocked"
+              ).length
+            }
           </p>
         </div>
 
         <div className="log-card">
           <h3>Masked</h3>
           <p>
-            {logs.filter((log) => log.status === "Masked").length}
+            {
+              securityLogs.filter(
+                (log) => log.status === "Masked"
+              ).length
+            }
           </p>
         </div>
 
         <div className="log-card">
           <h3>High Severity</h3>
           <p>
-            {logs.filter((log) => log.severity === "High").length}
+            {
+              securityLogs.filter(
+                (log) => log.severity === "High"
+              ).length
+            }
           </p>
         </div>
       </div>
