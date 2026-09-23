@@ -49,27 +49,6 @@ function Logs() {
 
     return matchesSearch && matchesStatus;
   });
-  <div className="log-summary">
-  <div className="log-card">
-    <h3>Total Events</h3>
-    <p>{logs.length}</p>
-  </div>
-
-  <div className="log-card">
-    <h3>Blocked</h3>
-    <p>{logs.filter((log) => log.status === "Blocked").length}</p>
-  </div>
-
-  <div className="log-card">
-    <h3>Masked</h3>
-    <p>{logs.filter((log) => log.status === "Masked").length}</p>
-  </div>
-
-  <div className="log-card">
-    <h3>High Severity</h3>
-    <p>{logs.filter((log) => log.severity === "High").length}</p>
-  </div>
-</div>
 
   return (
     <div className="page">
@@ -79,6 +58,36 @@ function Logs() {
         Monitor AI security events and detected threats.
       </p>
 
+      {/* Security Summary Cards */}
+      <div className="log-summary">
+        <div className="log-card">
+          <h3>Total Events</h3>
+          <p>{logs.length}</p>
+        </div>
+
+        <div className="log-card">
+          <h3>Blocked</h3>
+          <p>
+            {logs.filter((log) => log.status === "Blocked").length}
+          </p>
+        </div>
+
+        <div className="log-card">
+          <h3>Masked</h3>
+          <p>
+            {logs.filter((log) => log.status === "Masked").length}
+          </p>
+        </div>
+
+        <div className="log-card">
+          <h3>High Severity</h3>
+          <p>
+            {logs.filter((log) => log.severity === "High").length}
+          </p>
+        </div>
+      </div>
+
+      {/* Search and Filter */}
       <div className="log-controls">
         <input
           type="text"
@@ -98,6 +107,7 @@ function Logs() {
         </select>
       </div>
 
+      {/* Security Logs Table */}
       <table className="logs-table">
         <thead>
           <tr>
@@ -116,8 +126,25 @@ function Logs() {
               <td>{log.id}</td>
               <td>{log.type}</td>
               <td>{log.user}</td>
-              <td>{log.status}</td>
-              <td>{log.severity}</td>
+
+              {/* Status Badge */}
+              <td>
+                <span
+                  className={`status-badge ${log.status.toLowerCase()}`}
+                >
+                  {log.status}
+                </span>
+              </td>
+
+              {/* Severity Badge */}
+              <td>
+                <span
+                  className={`severity-badge ${log.severity.toLowerCase()}`}
+                >
+                  {log.severity}
+                </span>
+              </td>
+
               <td>{log.time}</td>
             </tr>
           ))}
