@@ -1,43 +1,21 @@
 import { useAuth } from "../AuthContext";
+import { securityLogs } from "../data/securityLogs";
 
 function Dashboard() {
   const { user } = useAuth();
 
-  const logs = [
-    {
-      id: 1,
-      status: "Blocked",
-      severity: "High",
-    },
-    {
-      id: 2,
-      status: "Allowed",
-      severity: "Low",
-    },
-    {
-      id: 3,
-      status: "Masked",
-      severity: "Medium",
-    },
-    {
-      id: 4,
-      status: "Blocked",
-      severity: "High",
-    },
-  ];
+  const totalEvents = securityLogs.length;
 
-  const totalEvents = logs.length;
-
-  const blockedEvents = logs.filter(
+  const blockedEvents = securityLogs.filter(
     (log) => log.status === "Blocked"
   ).length;
 
-  const highSeverityEvents = logs.filter(
+  const highSeverityEvents = securityLogs.filter(
     (log) => log.severity === "High"
   ).length;
 
   const activeUsers = new Set(
-    ["user01", "user02", "user03", "user04"]
+    securityLogs.map((log) => log.user)
   ).size;
 
   return (
@@ -62,6 +40,7 @@ function Dashboard() {
         Monitor AI security activity and threats.
       </p>
 
+      {/* Dashboard Statistics */}
       <div className="dashboard-cards">
         <div className="card">
           <h3>Total Events</h3>
@@ -82,6 +61,47 @@ function Dashboard() {
           <h3>Active Users</h3>
           <p>{activeUsers}</p>
         </div>
+      </div>
+
+      {/* Recent Security Activity */}
+      <div className="recent-activity">
+        <h2>Recent Security Activity</h2>
+
+        <table className="logs-table">
+          <thead>
+            <tr>
+              <th>Threat Type</th>
+              <th>User</th>
+              <th>Status</th>
+              <th>Severity</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {securityLogs.map((log) => (
+              <tr key={log.id}>
+                <td>{log.type}</td>
+                <td>{log.user}</td>
+                <td>
+                  <span
+                    className={`status-badge ${log.status.toLowerCase()}`}
+                  >
+                    {log.status}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    className={`severity-badge ${log.severity.toLowerCase()}`}
+                  >
+                    {log.severity}
+                  </span>
+                </td>
+                <td>{log.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

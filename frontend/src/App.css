@@ -258,3 +258,15 @@ body {
   background: #e0f5e0;
   color: #267326;
 }
+.recent-activity {
+  background: white;
+  padding: 20px;
+  margin-top: 25px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.recent-activity h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
