@@ -18,6 +18,14 @@ function Dashboard() {
     securityLogs.map((log) => log.user)
   ).size;
 
+  const allowedEvents = securityLogs.filter(
+    (log) => log.status === "Allowed"
+  ).length;
+
+  const maskedEvents = securityLogs.filter(
+    (log) => log.status === "Masked"
+  ).length;
+
   return (
     <div className="page">
       <h1>Security Dashboard</h1>
@@ -37,7 +45,7 @@ function Dashboard() {
       )}
 
       <p>
-        Monitor AI security activity and threats.
+        Monitor AI security activity and detected threats.
       </p>
 
       {/* Dashboard Statistics */}
@@ -63,6 +71,31 @@ function Dashboard() {
         </div>
       </div>
 
+      {/* Security Threat Distribution */}
+      <div className="threat-distribution">
+        <h2>Security Event Distribution</h2>
+
+        <div className="distribution-cards">
+          <div className="distribution-card">
+            <h3>Blocked</h3>
+            <p>{blockedEvents}</p>
+            <span>Threats blocked</span>
+          </div>
+
+          <div className="distribution-card">
+            <h3>Allowed</h3>
+            <p>{allowedEvents}</p>
+            <span>Requests allowed</span>
+          </div>
+
+          <div className="distribution-card">
+            <h3>Masked</h3>
+            <p>{maskedEvents}</p>
+            <span>Data protected</span>
+          </div>
+        </div>
+      </div>
+
       {/* Recent Security Activity */}
       <div className="recent-activity">
         <h2>Recent Security Activity</h2>
@@ -83,6 +116,7 @@ function Dashboard() {
               <tr key={log.id}>
                 <td>{log.type}</td>
                 <td>{log.user}</td>
+
                 <td>
                   <span
                     className={`status-badge ${log.status.toLowerCase()}`}
@@ -90,6 +124,7 @@ function Dashboard() {
                     {log.status}
                   </span>
                 </td>
+
                 <td>
                   <span
                     className={`severity-badge ${log.severity.toLowerCase()}`}
@@ -97,6 +132,7 @@ function Dashboard() {
                     {log.severity}
                   </span>
                 </td>
+
                 <td>{log.time}</td>
               </tr>
             ))}

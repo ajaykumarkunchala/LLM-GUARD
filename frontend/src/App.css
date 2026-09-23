@@ -303,3 +303,40 @@ body {
 .delete-button:hover {
   opacity: 0.8;
 }
+.threat-distribution {
+  background: white;
+  padding: 20px;
+  margin-top: 25px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.threat-distribution h2 {
+  margin-top: 0;
+}
+
+.distribution-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.distribution-card {
+  padding: 18px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.distribution-card h3 {
+  margin: 0 0 10px;
+}
+
+.distribution-card p {
+  margin: 0 0 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.distribution-card span {
+  font-size: 14px;
+}
