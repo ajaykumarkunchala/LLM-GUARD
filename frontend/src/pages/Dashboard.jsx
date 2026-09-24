@@ -1,5 +1,6 @@
 import { useAuth } from "../AuthContext";
 import { securityLogs } from "../data/securityLogs";
+import ApiStatus from "../components/ApiStatus";
 
 function Dashboard() {
   const { user } = useAuth();
@@ -30,6 +31,10 @@ function Dashboard() {
     <div className="page">
       <h1>Security Dashboard</h1>
 
+      {/* Backend API Status */}
+      <ApiStatus />
+
+      {/* Current User Information */}
       {user && (
         <div className="user-info">
           <h3>Current User</h3>
@@ -115,6 +120,7 @@ function Dashboard() {
             {securityLogs.map((log) => (
               <tr key={log.id}>
                 <td>{log.type}</td>
+
                 <td>{log.user}</td>
 
                 <td>

@@ -429,3 +429,32 @@ body {
 .empty-state p {
   margin-bottom: 0;
 }
+.api-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 10px 0 20px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.api-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.api-status.checking .api-status-dot {
+  background: orange;
+}
+
+.api-status.connected .api-status-dot {
+  background: green;
+}
+
+.api-status.offline .api-status-dot {
+  background: red;
+}
