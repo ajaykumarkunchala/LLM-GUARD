@@ -413,3 +413,19 @@ body {
     overflow-x: auto;
   }
 }
+.empty-state {
+  background: white;
+  padding: 40px 20px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.empty-state h3 {
+  margin-top: 0;
+}
+
+.empty-state p {
+  margin-bottom: 0;
+}

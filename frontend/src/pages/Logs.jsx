@@ -85,52 +85,55 @@ function Logs() {
         </select>
       </div>
 
-      {/* Security Logs Table */}
-      <table className="logs-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Threat Type</th>
-            <th>User</th>
-            <th>Status</th>
-            <th>Severity</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredLogs.map((log) => (
-            <tr key={log.id}>
-              <td>{log.id}</td>
-              <td>{log.type}</td>
-              <td>{log.user}</td>
-
-              {/* Status Badge */}
-              <td>
-                <span
-                  className={`status-badge ${log.status.toLowerCase()}`}
-                >
-                  {log.status}
-                </span>
-              </td>
-
-              {/* Severity Badge */}
-              <td>
-                <span
-                  className={`severity-badge ${log.severity.toLowerCase()}`}
-                >
-                  {log.severity}
-                </span>
-              </td>
-
-              <td>{log.time}</td>
+      {/* Empty State */}
+      {filteredLogs.length === 0 ? (
+        <div className="empty-state">
+          <h3>No Security Logs Found</h3>
+          <p>
+            No security events match your current search or filter.
+          </p>
+        </div>
+      ) : (
+        <table className="logs-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Threat Type</th>
+              <th>User</th>
+              <th>Status</th>
+              <th>Severity</th>
+              <th>Time</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
 
-      {filteredLogs.length === 0 && (
-        <p>No matching security logs found.</p>
+          <tbody>
+            {filteredLogs.map((log) => (
+              <tr key={log.id}>
+                <td>{log.id}</td>
+                <td>{log.type}</td>
+                <td>{log.user}</td>
+
+                <td>
+                  <span
+                    className={`status-badge ${log.status.toLowerCase()}`}
+                  >
+                    {log.status}
+                  </span>
+                </td>
+
+                <td>
+                  <span
+                    className={`severity-badge ${log.severity.toLowerCase()}`}
+                  >
+                    {log.severity}
+                  </span>
+                </td>
+
+                <td>{log.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
