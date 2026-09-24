@@ -340,3 +340,76 @@ body {
 .distribution-card span {
   font-size: 14px;
 }
+/* Responsive Dashboard */
+
+@media (max-width: 900px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .log-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .distribution-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sidebar nav a {
+    margin: 0;
+  }
+
+  .main-content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .log-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .distribution-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .log-controls {
+    flex-direction: column;
+  }
+
+  .log-controls input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .logs-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .recent-activity {
+    overflow-x: auto;
+  }
+}
