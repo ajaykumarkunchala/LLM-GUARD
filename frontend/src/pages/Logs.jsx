@@ -4,16 +4,22 @@ import { securityLogs } from "../data/securityLogs";
 function Logs() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [severityFilter, setSeverityFilter] = useState("All");
 
   const filteredLogs = securityLogs.filter((log) => {
+    const searchText = search.toLowerCase();
+
     const matchesSearch =
-      log.type.toLowerCase().includes(search.toLowerCase()) ||
-      log.user.toLowerCase().includes(search.toLowerCase());
+      log.type.toLowerCase().includes(searchText) ||
+      log.user.toLowerCase().includes(searchText);
 
     const matchesStatus =
       statusFilter === "All" || log.status === statusFilter;
 
-    return matchesSearch && matchesStatus;
+    const matchesSeverity =
+      severityFilter === "All" || log.severity === severityFilter;
+
+    return matchesSearch && matchesStatus && matchesSeverity;
   });
 
   return (
@@ -24,7 +30,7 @@ function Logs() {
         Monitor AI security events and detected threats.
       </p>
 
-      {/* Security Summary Cards */}
+      {/* Log Summary */}
       <div className="log-summary">
         <div className="log-card">
           <h3>Total Events</h3>
@@ -34,42 +40,36 @@ function Logs() {
         <div className="log-card">
           <h3>Blocked</h3>
           <p>
-            {
-              securityLogs.filter(
-                (log) => log.status === "Blocked"
-              ).length
-            }
+            {securityLogs.filter(
+              (log) => log.status === "Blocked"
+            ).length}
           </p>
         </div>
 
         <div className="log-card">
           <h3>Masked</h3>
           <p>
-            {
-              securityLogs.filter(
-                (log) => log.status === "Masked"
-              ).length
-            }
+            {securityLogs.filter(
+              (log) => log.status === "Masked"
+            ).length}
           </p>
         </div>
 
         <div className="log-card">
           <h3>High Severity</h3>
           <p>
-            {
-              securityLogs.filter(
-                (log) => log.severity === "High"
-              ).length
-            }
+            {securityLogs.filter(
+              (log) => log.severity === "High"
+            ).length}
           </p>
         </div>
       </div>
 
-      {/* Search and Filter */}
+      {/* Search and Filters */}
       <div className="log-controls">
         <input
           type="text"
-          placeholder="Search logs..."
+          placeholder="Search threat type or user..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -83,14 +83,24 @@ function Logs() {
           <option value="Allowed">Allowed</option>
           <option value="Masked">Masked</option>
         </select>
+
+        <select
+          value={severityFilter}
+          onChange={(e) => setSeverityFilter(e.target.value)}
+        >
+          <option value="All">All Severity</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
       </div>
 
-      {/* Empty State */}
+      {/* Security Logs Table */}
       {filteredLogs.length === 0 ? (
         <div className="empty-state">
           <h3>No Security Logs Found</h3>
           <p>
-            No security events match your current search or filter.
+            No security events match your current search or filters.
           </p>
         </div>
       ) : (
@@ -110,7 +120,9 @@ function Logs() {
             {filteredLogs.map((log) => (
               <tr key={log.id}>
                 <td>{log.id}</td>
+
                 <td>{log.type}</td>
+
                 <td>{log.user}</td>
 
                 <td>
