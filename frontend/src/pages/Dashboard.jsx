@@ -1,3 +1,4 @@
+import UserHeader from "../components/UserHeader";
 import { useAuth } from "../AuthContext";
 import { securityLogs } from "../data/securityLogs";
 import ApiStatus from "../components/ApiStatus";
@@ -31,22 +32,11 @@ function Dashboard() {
     <div className="page">
       <h1>Security Dashboard</h1>
 
+      {/* Logged-in User Header */}
+      <UserHeader />
+
+      {/* Backend API Status */}
       <ApiStatus />
-
-      {/* Current User */}
-      {user && (
-        <div className="user-info">
-          <h3>Current User</h3>
-
-          <p>
-            Username: <strong>{user.username}</strong>
-          </p>
-
-          <p>
-            Role: <strong>{user.role}</strong>
-          </p>
-        </div>
-      )}
 
       {/* RBAC Access Summary */}
       {user && (

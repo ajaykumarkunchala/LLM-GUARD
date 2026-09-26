@@ -519,3 +519,47 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 15px 18px;
+  margin: 15px 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.user-header > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-header-label {
+  font-size: 13px;
+  color: #666;
+}
+
+.role-badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.role-badge.admin {
+  background: #e8e8ff;
+}
+
+.role-badge.analyst {
+  background: #e8f5e8;
+}
+
+@media (max-width: 600px) {
+  .user-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
