@@ -31,4 +31,20 @@ export const securityLogs = [
     severity: "High",
     time: "11:20 AM",
   },
+  {
+    id: 5,
+    type: "Prompt Injection",
+    user: "user05",
+    status: "Blocked",
+    severity: "High",
+    time: "11:35 AM",
+  },
+  {
+    id: 6,
+    type: "Normal Request",
+    user: "user02",
+    status: "Allowed",
+    severity: "Low",
+    time: "11:48 AM",
+  },
 ];
