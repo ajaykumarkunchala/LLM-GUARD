@@ -3,6 +3,7 @@ import { securityLogs } from "../data/securityLogs";
 
 function Logs() {
   const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
   const [severityFilter, setSeverityFilter] = useState("All");
 
@@ -13,14 +14,29 @@ function Logs() {
       log.type.toLowerCase().includes(searchText) ||
       log.user.toLowerCase().includes(searchText);
 
+    const matchesType =
+      typeFilter === "All" || log.type === typeFilter;
+
     const matchesStatus =
       statusFilter === "All" || log.status === statusFilter;
 
     const matchesSeverity =
       severityFilter === "All" || log.severity === severityFilter;
 
-    return matchesSearch && matchesStatus && matchesSeverity;
+    return (
+      matchesSearch &&
+      matchesType &&
+      matchesStatus &&
+      matchesSeverity
+    );
   });
+
+  const resetFilters = () => {
+    setSearch("");
+    setTypeFilter("All");
+    setStatusFilter("All");
+    setSeverityFilter("All");
+  };
 
   return (
     <div className="page">
@@ -75,6 +91,25 @@ function Logs() {
         />
 
         <select
+          value={typeFilter}
+          onChange={(e) => setTypeFilter(e.target.value)}
+        >
+          <option value="All">All Threat Types</option>
+          <option value="Prompt Injection">
+            Prompt Injection
+          </option>
+          <option value="Jailbreak Attempt">
+            Jailbreak Attempt
+          </option>
+          <option value="Sensitive Data">
+            Sensitive Data
+          </option>
+          <option value="Normal Request">
+            Normal Request
+          </option>
+        </select>
+
+        <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
@@ -93,12 +128,25 @@ function Logs() {
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
+
+        <button
+          className="reset-button"
+          onClick={resetFilters}
+        >
+          Reset
+        </button>
       </div>
+
+      {/* Result Count */}
+      <p className="result-count">
+        Showing {filteredLogs.length} of {securityLogs.length} events
+      </p>
 
       {/* Security Logs Table */}
       {filteredLogs.length === 0 ? (
         <div className="empty-state">
           <h3>No Security Logs Found</h3>
+
           <p>
             No security events match your current search or filters.
           </p>

@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import { activityLogs } from "../data/activityLogs";
+import { users as initialUsers } from "../data/users";
 
 function Users() {
   const { user } = useAuth();
 
-  const [users, setUsers] = useState([
-    { id: 1, name: "Admin User", role: "Admin" },
-    { id: 2, name: "Security Analyst", role: "Analyst" },
-    { id: 3, name: "Security Analyst 2", role: "Analyst" },
-  ]);
+  const [userList, setUserList] = useState(initialUsers);
 
   const [showForm, setShowForm] = useState(false);
+
   const [newUsername, setNewUsername] = useState("");
+
   const [newRole, setNewRole] = useState("Analyst");
 
   const handleAddUser = (e) => {
@@ -24,12 +23,12 @@ function Users() {
     }
 
     const newUser = {
-      id: users.length + 1,
+      id: userList.length + 1,
       name: newUsername,
       role: newRole,
     };
 
-    setUsers([...users, newUser]);
+    setUserList([...userList, newUser]);
 
     activityLogs.push({
       id: activityLogs.length + 1,
@@ -45,9 +44,13 @@ function Users() {
   };
 
   const handleDeleteUser = (id) => {
-    const selectedUser = users.find(
+    const selectedUser = userList.find(
       (item) => item.id === id
     );
+
+    if (!selectedUser) {
+      return;
+    }
 
     if (selectedUser.role === "Admin") {
       alert("Admin users cannot be deleted.");
@@ -59,8 +62,8 @@ function Users() {
     );
 
     if (confirmDelete) {
-      setUsers(
-        users.filter((item) => item.id !== id)
+      setUserList(
+        userList.filter((item) => item.id !== id)
       );
 
       activityLogs.push({
@@ -81,11 +84,13 @@ function Users() {
         Manage users and their assigned security roles.
       </p>
 
+      {/* Current User */}
       <div className="user-info">
         <h3>Access Level</h3>
 
         <p>
-          Logged in as: <strong>{user?.username}</strong>
+          Logged in as:{" "}
+          <strong>{user?.username}</strong>
         </p>
 
         <p>
@@ -93,6 +98,7 @@ function Users() {
         </p>
       </div>
 
+      {/* User Table */}
       <table className="logs-table">
         <thead>
           <tr>
@@ -105,10 +111,12 @@ function Users() {
         </thead>
 
         <tbody>
-          {users.map((item) => (
+          {userList.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
+
               <td>{item.name}</td>
+
               <td>{item.role}</td>
 
               <td>
@@ -136,12 +144,15 @@ function Users() {
         </tbody>
       </table>
 
+      {/* Admin Actions */}
       {user?.role === "Admin" && (
         <div className="admin-actions">
           <h3>Admin Actions</h3>
 
           <button
-            onClick={() => setShowForm(!showForm)}
+            onClick={() =>
+              setShowForm(!showForm)
+            }
           >
             {showForm ? "Cancel" : "Add User"}
           </button>
@@ -170,8 +181,13 @@ function Users() {
                   setNewRole(e.target.value)
                 }
               >
-                <option value="Analyst">Analyst</option>
-                <option value="Admin">Admin</option>
+                <option value="Analyst">
+                  Analyst
+                </option>
+
+                <option value="Admin">
+                  Admin
+                </option>
               </select>
 
               <button type="submit">
