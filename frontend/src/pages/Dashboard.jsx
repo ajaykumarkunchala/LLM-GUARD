@@ -31,10 +31,9 @@ function Dashboard() {
     <div className="page">
       <h1>Security Dashboard</h1>
 
-      {/* Backend API Status */}
       <ApiStatus />
 
-      {/* Current User Information */}
+      {/* Current User */}
       {user && (
         <div className="user-info">
           <h3>Current User</h3>
@@ -46,6 +45,48 @@ function Dashboard() {
           <p>
             Role: <strong>{user.role}</strong>
           </p>
+        </div>
+      )}
+
+      {/* RBAC Access Summary */}
+      {user && (
+        <div className="access-summary">
+          <h2>Access Summary</h2>
+
+          <div className="access-details">
+            <div>
+              <strong>Role</strong>
+              <span>{user.role}</span>
+            </div>
+
+            <div>
+              <strong>Dashboard</strong>
+              <span>Allowed</span>
+            </div>
+
+            <div>
+              <strong>Security Logs</strong>
+              <span>Allowed</span>
+            </div>
+
+            <div>
+              <strong>User Management</strong>
+              <span>
+                {user.role === "Admin"
+                  ? "Allowed"
+                  : "Admin Only"}
+              </span>
+            </div>
+
+            <div>
+              <strong>Activity Logs</strong>
+              <span>
+                {user.role === "Admin"
+                  ? "Allowed"
+                  : "Admin Only"}
+              </span>
+            </div>
+          </div>
         </div>
       )}
 
@@ -76,7 +117,7 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Security Threat Distribution */}
+      {/* Security Event Distribution */}
       <div className="threat-distribution">
         <h2>Security Event Distribution</h2>
 
