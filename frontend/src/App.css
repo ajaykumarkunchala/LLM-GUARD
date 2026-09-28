@@ -628,3 +628,41 @@ body {
     align-items: flex-start;
   }
 }
+.security-health {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.security-health h2 {
+  margin: 0 0 8px;
+}
+
+.security-health p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.health-details {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .security-health {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .health-details {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

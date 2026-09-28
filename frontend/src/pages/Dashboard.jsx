@@ -44,6 +44,14 @@ function Dashboard() {
       ? Math.round((maskedEvents / totalEvents) * 100)
       : 0;
 
+  // Security health summary
+  const securityHealth =
+    highSeverityEvents === 0
+      ? "No High Severity Threats"
+      : `${highSeverityEvents} High Severity Threat${
+          highSeverityEvents > 1 ? "s" : ""
+        } Detected`;
+
   return (
     <div className="page">
 
@@ -113,6 +121,29 @@ function Dashboard() {
           </div>
         </div>
       )}
+
+      {/* Security Health Summary */}
+      <div className="security-health">
+
+        <div>
+          <h2>Security Health</h2>
+
+          <p>{securityHealth}</p>
+        </div>
+
+        <div className="health-details">
+
+          <span>
+            Total Events: {totalEvents}
+          </span>
+
+          <span>
+            High Severity: {highSeverityEvents}
+          </span>
+
+        </div>
+
+      </div>
 
       {/* Dashboard Statistics */}
       <div className="dashboard-cards">
