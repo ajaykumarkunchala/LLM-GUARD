@@ -52,6 +52,23 @@ function Dashboard() {
           highSeverityEvents > 1 ? "s" : ""
         } Detected`;
 
+  // Threat type counts
+  const promptInjectionCount = securityLogs.filter(
+    (log) => log.type === "Prompt Injection"
+  ).length;
+
+  const jailbreakCount = securityLogs.filter(
+    (log) => log.type === "Jailbreak Attempt"
+  ).length;
+
+  const sensitiveDataCount = securityLogs.filter(
+    (log) => log.type === "Sensitive Data"
+  ).length;
+
+  const normalRequestCount = securityLogs.filter(
+    (log) => log.type === "Normal Request"
+  ).length;
+
   return (
     <div className="page">
 
@@ -59,6 +76,7 @@ function Dashboard() {
       <div className="dashboard-title">
         <div>
           <h1>Security Dashboard</h1>
+
           <p>
             Monitor AI security activity and detected threats.
           </p>
@@ -81,6 +99,7 @@ function Dashboard() {
       {/* RBAC Access Summary */}
       {user && (
         <div className="access-summary">
+
           <h2>Access Summary</h2>
 
           <div className="access-details">
@@ -102,6 +121,7 @@ function Dashboard() {
 
             <div>
               <strong>User Management</strong>
+
               <span>
                 {user.role === "Admin"
                   ? "Allowed"
@@ -111,6 +131,7 @@ function Dashboard() {
 
             <div>
               <strong>Activity Logs</strong>
+
               <span>
                 {user.role === "Admin"
                   ? "Allowed"
@@ -170,6 +191,49 @@ function Dashboard() {
 
       </div>
 
+      {/* Threat Type Breakdown */}
+      <div className="threat-breakdown">
+
+        <h2>Threat Type Breakdown</h2>
+
+        <div className="threat-breakdown-cards">
+
+          <div className="threat-breakdown-card">
+            <h3>Prompt Injection</h3>
+
+            <p>{promptInjectionCount}</p>
+
+            <span>Detected events</span>
+          </div>
+
+          <div className="threat-breakdown-card">
+            <h3>Jailbreak Attempts</h3>
+
+            <p>{jailbreakCount}</p>
+
+            <span>Detected events</span>
+          </div>
+
+          <div className="threat-breakdown-card">
+            <h3>Sensitive Data</h3>
+
+            <p>{sensitiveDataCount}</p>
+
+            <span>Detected events</span>
+          </div>
+
+          <div className="threat-breakdown-card">
+            <h3>Normal Requests</h3>
+
+            <p>{normalRequestCount}</p>
+
+            <span>Allowed events</span>
+          </div>
+
+        </div>
+
+      </div>
+
       {/* Security Event Distribution */}
       <div className="threat-distribution">
 
@@ -211,6 +275,7 @@ function Dashboard() {
           </div>
 
         </div>
+
       </div>
 
       {/* Recent Security Activity */}

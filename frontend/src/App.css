@@ -666,3 +666,54 @@ body {
     gap: 8px;
   }
 }
+.threat-breakdown {
+  background: white;
+  padding: 20px;
+  margin-top: 25px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.threat-breakdown h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+.threat-breakdown-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.threat-breakdown-card {
+  padding: 18px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.threat-breakdown-card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.threat-breakdown-card p {
+  margin: 0 0 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.threat-breakdown-card span {
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .threat-breakdown-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .threat-breakdown-cards {
+    grid-template-columns: 1fr;
+  }
+}
