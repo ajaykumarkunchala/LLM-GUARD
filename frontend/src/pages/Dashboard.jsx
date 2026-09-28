@@ -30,7 +30,21 @@ function Dashboard() {
 
   return (
     <div className="page">
-      <h1>Security Dashboard</h1>
+
+      {/* Dashboard Title and Refresh Button */}
+      <div className="dashboard-title">
+        <div>
+          <h1>Security Dashboard</h1>
+          <p>Monitor AI security activity and detected threats.</p>
+        </div>
+
+        <button
+          className="refresh-button"
+          onClick={() => window.location.reload()}
+        >
+          Refresh Dashboard
+        </button>
+      </div>
 
       {/* Logged-in User Header */}
       <UserHeader />
@@ -80,12 +94,9 @@ function Dashboard() {
         </div>
       )}
 
-      <p>
-        Monitor AI security activity and detected threats.
-      </p>
-
       {/* Dashboard Statistics */}
       <div className="dashboard-cards">
+
         <div className="card">
           <h3>Total Events</h3>
           <p>{totalEvents}</p>
@@ -105,13 +116,16 @@ function Dashboard() {
           <h3>Active Users</h3>
           <p>{activeUsers}</p>
         </div>
+
       </div>
 
       {/* Security Event Distribution */}
       <div className="threat-distribution">
+
         <h2>Security Event Distribution</h2>
 
         <div className="distribution-cards">
+
           <div className="distribution-card">
             <h3>Blocked</h3>
             <p>{blockedEvents}</p>
@@ -129,14 +143,17 @@ function Dashboard() {
             <p>{maskedEvents}</p>
             <span>Data protected</span>
           </div>
+
         </div>
       </div>
 
       {/* Recent Security Activity */}
       <div className="recent-activity">
+
         <h2>Recent Security Activity</h2>
 
         <table className="logs-table">
+
           <thead>
             <tr>
               <th>Threat Type</th>
@@ -150,6 +167,7 @@ function Dashboard() {
           <tbody>
             {securityLogs.map((log) => (
               <tr key={log.id}>
+
                 <td>{log.type}</td>
 
                 <td>{log.user}</td>
@@ -171,11 +189,15 @@ function Dashboard() {
                 </td>
 
                 <td>{log.time}</td>
+
               </tr>
             ))}
           </tbody>
+
         </table>
+
       </div>
+
     </div>
   );
 }
