@@ -28,6 +28,22 @@ function Dashboard() {
     (log) => log.status === "Masked"
   ).length;
 
+  // Security event percentages
+  const blockedPercentage =
+    totalEvents > 0
+      ? Math.round((blockedEvents / totalEvents) * 100)
+      : 0;
+
+  const allowedPercentage =
+    totalEvents > 0
+      ? Math.round((allowedEvents / totalEvents) * 100)
+      : 0;
+
+  const maskedPercentage =
+    totalEvents > 0
+      ? Math.round((maskedEvents / totalEvents) * 100)
+      : 0;
+
   return (
     <div className="page">
 
@@ -35,7 +51,9 @@ function Dashboard() {
       <div className="dashboard-title">
         <div>
           <h1>Security Dashboard</h1>
-          <p>Monitor AI security activity and detected threats.</p>
+          <p>
+            Monitor AI security activity and detected threats.
+          </p>
         </div>
 
         <button
@@ -58,6 +76,7 @@ function Dashboard() {
           <h2>Access Summary</h2>
 
           <div className="access-details">
+
             <div>
               <strong>Role</strong>
               <span>{user.role}</span>
@@ -90,6 +109,7 @@ function Dashboard() {
                   : "Admin Only"}
               </span>
             </div>
+
           </div>
         </div>
       )}
@@ -126,22 +146,37 @@ function Dashboard() {
 
         <div className="distribution-cards">
 
+          {/* Blocked */}
           <div className="distribution-card">
             <h3>Blocked</h3>
+
             <p>{blockedEvents}</p>
-            <span>Threats blocked</span>
+
+            <span>
+              {blockedPercentage}% of total events
+            </span>
           </div>
 
+          {/* Allowed */}
           <div className="distribution-card">
             <h3>Allowed</h3>
+
             <p>{allowedEvents}</p>
-            <span>Requests allowed</span>
+
+            <span>
+              {allowedPercentage}% of total events
+            </span>
           </div>
 
+          {/* Masked */}
           <div className="distribution-card">
             <h3>Masked</h3>
+
             <p>{maskedEvents}</p>
-            <span>Data protected</span>
+
+            <span>
+              {maskedPercentage}% of total events
+            </span>
           </div>
 
         </div>
